@@ -1,0 +1,141 @@
+<style>
+/* ===== Footer Main ===== */
+.main-footer {
+    background: linear-gradient(135deg, #0f172a, #111827);
+    color: #fff;
+    padding: 60px 20px 10px;
+    margin-top: 0px;
+    position: relative;right: 0;
+}
+
+/* Container */
+.footer-container {
+    width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+/* Sections */
+.footer-section h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    position: relative;
+}
+
+.footer-section h3::after {
+    content: "";
+    width: 40px;
+    height: 3px;
+    background: #00f5ff;
+    display: block;
+    margin-top: 8px;
+    border-radius: 5px;
+}
+
+.footer-section p,
+.footer-section li {
+    font-size: 14px;
+    color: #cbd5e1;
+    margin-bottom: 8px;
+}
+
+/* Links */
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section a {
+    text-decoration: none;
+    color: #cbd5e1;
+    transition: 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #00f5ff;
+    padding-right: 5px;
+}
+
+/* Bottom */
+.footer-bottom {
+    text-align: center;
+    margin-top: 5px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+/* Powered by */
+.powered {    
+    background: linear-gradient(135deg, #0f172a, #111827);
+    position: fixed;bottom: 0 ;left: 0;
+    width: 100%; 
+    padding: 5px;
+}
+   .co{margin-bottom: 20px;}
+
+.powered a {
+    font-weight: bold;
+    background: linear-gradient(90deg, #00f5ff, #00ff88);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: 0.3s ease;
+
+}
+
+.powered a:hover {
+    text-shadow: 0 0 10px #00f5ff;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .main-footer{
+        padding: 40px 15px 20px;
+    }
+}
+</style>
+
+<footer class="main-footer">
+    <div class="footer-container">
+        
+        <div class="footer-section">
+            <h3>عن المتجر</h3>
+            <p>
+                أفضل متجر سكوترات في مصر، شحن سريع، منتجات أصلية،
+                وضمان سنة على جميع المنتجات.
+            </p>
+        </div>
+
+        <div class="footer-section">
+            <h3>روابط سريعة</h3>
+            <ul>
+                <li><a href="{% url 'pro:home' %}">الرئيسية</a></li>
+                <li><a href="{% url 'pro:categories_list' %}">الفئات</a></li>
+                <li><a href="{% url 'wl:wishlist' %}">المفضلة</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>تواصل معنا</h3>
+            <p>الهاتف: 0123456789</p>
+            <p>البريد الإلكتروني: info@scooterstore.com</p>
+            <p>القاهرة، مصر</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+                <div class="co"> &copy; 2026 متجر السكوترات. جميع الحقوق محفوظة.</div>
+                <div class="powered">
+            Powered by 
+            <a href="https://yourwebsite.com" target="_blank">
+                Ahmed Abdelazim
+            </a>
+        </div>
+    </div>
+</footer>
+
+

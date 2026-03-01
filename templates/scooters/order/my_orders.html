@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="my-orders-page">
+
+    <div class="container">
+
+        <h1>طلباتي</h1>
+
+        {% if orders %}
+
+            <table class="orders-table">
+
+                <tr>
+                    <th>رقم الطلب</th>
+                    <th>التاريخ</th>
+                    <th>الإجمالي</th>
+                    <th>الحالة</th>
+                    <th>التفاصيل</th>
+                </tr>
+
+                {% for order in orders %}
+
+                <tr>
+
+                    <td>#{{ order.id }}</td>
+
+                    <td>
+                        {{ order.created_at|date:"Y-m-d" }}
+                    </td>
+
+                    <td>
+                        {{ order.total_price }} ج
+                    </td>
+
+                    <td>
+                        <span class="status {{ order.status }}">
+                            {{ order.get_status_display }}
+                        </span>
+                    </td>
+
+                    <td>
+                        <a href="{% url 'order:order_detail' order.id %}">
+                            عرض
+                        </a>
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        {% else %}
+
+            <p>لا يوجد طلبات بعد</p>
+
+        {% endif %}
+
+    </div>
+
+</section>
+{% endblock content %}

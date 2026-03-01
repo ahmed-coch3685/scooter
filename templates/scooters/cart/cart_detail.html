@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<section class="cart-page">
+
+    <div class="cart-container">
+
+        <h1>سلة المشتريات</h1>
+
+        {% if items %}
+
+        <table class="cart-table">
+
+            <thead>
+                <tr>
+                    <th>المنتج</th>
+                    <th>السعر</th>
+                    <th>الكمية</th>
+                    <th>الإجمالي</th>
+                    <th>حذف</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for item in items %}
+
+                <tr>
+
+                    <!-- اسم المنتج -->
+                    <td class="product-info">
+                        {{ item.product.name }}
+                    </td>
+
+                    <!-- السعر -->
+                    <td>
+                        {{ item.product.price }} ج
+                    </td>
+
+                    <!-- تحديث الكمية -->
+                    <td>
+
+                        <form method="POST"
+                              action="{% url 'cart:update_cart_item' item.id %}">
+                            {% csrf_token %}
+
+                            <input type="number"
+                                   name="quantity"
+                                   value="{{ item.quantity }}"
+                                   min="0"
+                                   class="qty-input">
+
+                            <button type="submit"
+                                    class="update-btn">
+                                تحديث
+                            </button>
+                        </form>
+
+                    </td>
+
+                    <!-- الإجمالي -->
+                    <td>
+                        {{ item.total_price }} ج
+                    </td>
+
+                    <!-- حذف -->
+                    <td>
+                        <form method="POST"
+                              action="{% url 'cart:update_cart_item' item.id %}">
+                            {% csrf_token %}
+                            <input type="hidden"
+                                   name="quantity"
+                                   value="0">
+                            <button class="delete-btn">
+                                ✕
+                            </button>
+                        </form>
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <!-- الإجمالي الكلي -->
+
+        <div class="cart-summary">
+
+            <h2>الإجمالي الكلي: {{ total }} ج</h2>
+
+            <a href="{% url 'order:checkout' %}" class="checkout-btn">
+                متابعة الدفع
+            </a>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-cart">
+            <p>السلة فارغة حالياً 🛒</p>
+            <a href="{% url 'pro:product_list' %}" class="shop-btn">
+                تسوق الآن
+            </a>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section><script src="{% static 'js/add_to_cart.js' %}"></script>
+{% endblock content %}

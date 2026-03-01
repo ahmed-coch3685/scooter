@@ -1,0 +1,65 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Login / Register</title>
+<link rel="stylesheet" href="{% static 'css/regstration.css' %}">
+</head>
+<body>
+<div class="card-container">
+    <div class="card" id="card">
+
+        <!-- Login -->
+        <div class="card-face login">
+            <h2>تسجيل الدخول</h2>
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="login">
+                <input type="text" name="username" placeholder=" اسم المستخدم">
+                <input type="password" name="password" placeholder="كلمة المرور">
+                {{erro}}
+                <a href="{% url 'acc:password_reset' %}">نسيت كلمة السر ؟</a>
+                <button type="submit">تسجيل الدخول</button>
+            </form>
+
+            <div class="switch">
+                ليس لديك حساب؟
+                <span onclick="flipCard()">إنشاء حساب</span>
+            </div>
+        </div>
+
+        <!-- Register -->
+        <div class="card-face register">
+            <h2>إنشاء حساب</h2>
+            <form method="post">
+                <input type="hidden" name="regst">
+
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="الاسم">
+                <input type="email" name="email" placeholder="البريد الإلكتروني">
+                <input type="password" name="password1" placeholder="كلمة المرور">
+                <input type="password" name="password2" placeholder="تأكيد كلمة المرور">
+                {{error}}
+                <button type="submit">إنشاء حساب</button>
+            </form>
+
+            <div class="switch">
+                لديك حساب؟
+                <span onclick="flipCard()">تسجيل الدخول</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function flipCard() {
+        document.getElementById("card").classList.toggle("flip");
+    }
+</script>
+
+</body>
+</html>
+

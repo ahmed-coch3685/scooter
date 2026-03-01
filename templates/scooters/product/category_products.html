@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h1>منتجات فئة: {{ category.name }}</h1>
+
+<div class="products-grid">
+    {% for product in products %}
+    <div class="product-card">
+        <a href="{% url 'pro:product_detail' product.slug %}">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.price }} جنيه</p>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

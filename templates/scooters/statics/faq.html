@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>الأسئلة الشائعة</h1>
+
+<div class="faq-container">
+    {% for item in faqs %}
+    <div class="faq-item">
+        <h3>{{ item.question }}</h3>
+        <p>{{ item.answer }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

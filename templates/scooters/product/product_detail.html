@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/product_detail_modern.css' %}">
+
+<section class="product-hero">
+    <div class="product-hero-image" style="background-image: url('{{ product.images.first.image.url }}')">
+        <div class="product-hero-info">
+            <h1>{{ product.name }}</h1>
+            <div class="hero-price">
+                {% if product.old_price %}
+                    <span class="old">{{ product.old_price }} ج</span>
+                {% endif %}
+                <span class="new">{{ product.price }} ج</span>
+            </div>
+            <div class="hero-rating">⭐⭐⭐⭐☆ <span>({{ product.reviews.count }})</span></div>
+        </div>
+    </div>
+</section>
+
+<section class="product-main">
+    <div class="purchase-card-modern">
+        {% if product.stock > 0 %}
+            <div class="stock-info">متوفر - باقي {{ product.stock }} قطعة 🔥</div>
+        {% else %}
+            <div class="stock-info out-of-stock">غير متوفر</div>
+        {% endif %}
+        <div class="quantity-control-modern">
+            <button onclick="updateQtyModern(-1)">-</button>
+            <input type="number" id="qtyModern" value="1" min="1">
+            <button onclick="updateQtyModern(1)">+</button>
+        </div>
+        <button class="btn-add-modern">أضف إلى السلة</button>
+        <button class="btn-buy-modern">اشترِ الآن</button>
+
+        <div class="trust-modern">
+            <p>🚚 شحن سريع</p>
+            <p>💳 الدفع عند الاستلام</p>
+            <p>🔒 دفع آمن 100%</p>
+        </div>
+    </div>
+
+    <div class="product-description-modern">
+        <h2>الوصف</h2>
+        <p>{{ product.description }}</p>
+
+        <h2>المواصفات</h2>
+        <div class="specs-grid">
+            {% for spec in product.details.all %}
+            <div class="spec-card">
+                <span class="spec-key">{{ spec.key }}</span>
+                <span class="spec-value">{{ spec.value }}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <h2>التقييمات</h2>
+        <div class="reviews-grid">
+            {% for review in product.reviews.all %}
+            <div class="review-card">
+                <strong>{{ review.user.username }}</strong>
+                <span>⭐⭐⭐⭐☆</span>
+                <p>{{ review.comment }}</p>
+            </div>
+            {% empty %}
+            <p>لا توجد تقييمات بعد.</p>
+            {% endfor %}
+            <button class="btn-review">أضف تقييمك</button>
+        </div>
+    </div>
+</section>
+
+<!-- Related Products -->
+<section class="related-products-modern">
+    <h2>منتجات مشابهة</h2>
+    <div class="related-grid">
+        {% for item in related_products %}
+        <a href="{% url 'pro:product_detail' item.slug %}" class="related-card">
+            <img src="{{ item.images.first.image.url }}" alt="{{ item.name }}">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.price }} ج</p>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Floating Wishlist & Share -->
+<div class="floating-actions">
+    <i class="fa fa-heart"></i>
+    <i class="fa fa-share-alt"></i>
+</div>
+
+<!-- Sticky bottom bar mobile -->
+<div class="sticky-bar-modern">
+    <span>{{ product.price }} ج</span>
+    <button id="stickyAddModern">أضف إلى السلة</button>
+</div>
+
+<script src="{% static 'js/product_detail.js' %}"></script>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<style>
+input:disabled, textarea:disabled{
+    background: #f5f5f5;
+    color: #999;
+    border: 1px solid #e0e0e0;
+    cursor: not-allowed;
+width: 200px;
+height: 30px;
+display: block;
+text-align: center;
+}
+
+</style>
+
+{% if request.user.avatar %}
+    <img src="{{ request.user.avatar.url }}" width="120">
+{% else %}
+    <img src="/static/av.jpg" width="120">
+{% endif %}
+<input type="text" name="username" value="{{ request.user.username }}">
+<input type="text" name="first_name" value="{{ request.user.first_name }}">
+<input type="text" name="last_name"value="{{ request.user.last_name }}">
+<input type="email"name="email"value="{{ request.user.email }}">
+
+<a href="{% url 'acc:edit_profile' %}">✏️ تعديل البروفايل</a>
+<a href="{% url 'acc:delete_account' %}" style="color:red;">
+🗑️ حذف الحساب
+</a>
+<script>
+    document.querySelectorAll("input, textarea").forEach(el=>{el.disabled=true;})
+</script>{% endblock content %}

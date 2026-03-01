@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{%static'registration.css'%}">
+
+<div class="card-container">
+    <div class="card" id="card">
+
+        <!-- Login -->
+        <div class="card-face login">
+            <h2>change pass</h2>
+            <form method="post">
+                {% csrf_token %}
+                <input type="password" name="password1" placeholder="كلمة المرور">
+                <input type="password" name="password2" placeholder="تاكيد كلمة المرور">
+                <a href="{% url 'acc:password_reset' %}">نسيت كلمة السر ؟</a>
+                <button type="submit">تغيير  </button>
+            </form>
+        </div></div></div>
+{% endblock content %}

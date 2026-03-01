@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<section class="shop-page">
+
+    <div class="shop-container">
+
+        <!-- Sidebar Filters -->
+
+        <aside class="filters">
+
+            <h3 class="hed">الفئات</h3>
+
+            {% for category in categories %}
+                <a href="?category={{ category.slug }}">
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+<div class="ficon"><i class="filtering-btn" onclick="openfilter()">f</i>
+    <i class="sorting-btn" onclick="opensort()">s</i></div>
+            <h3 class="hed">السعر</h3>
+            
+<div class="filter-drobdown filtering">
+            <form method="get">
+
+                <input type="number" name="min_price" placeholder="من">
+                <input type="number" name="max_price" placeholder="إلى">
+<br>
+                <button type="submit">تصفية</button>
+            </form>
+</div>
+
+            <h3 class="hed">ترتيب</h3>
+            
+<div class="filter-drobdown sorting">
+            <a href="?sort=price_asc">السعر: الأقل للأعلى</a>
+            <a href="?sort=price_desc">السعر: الأعلى للأقل</a>
+            <a href="?sort=newest">الأحدث</a>
+</div>
+        </aside>
+
+
+        <!-- Products Grid -->
+
+        <div class="products-grid">
+
+            {% for product in products %}
+
+            <div class="product-card">
+
+                <a href="{% url 'pro:product_detail' product.slug %}">
+
+                    <div class="product-image">
+                        {% if product.images.first %}
+                            <img src="{{ product.image.url }}">
+                        {% endif %}
+                    </div>
+                    <h3>{{ product.name }}</h3>
+            <p>{{ product.description|truncatechars:60 }}</p>
+            <p class="price">{{ product.price }} جنيه</p>
+            <div class="card-actions">
+                <i class="fa fa-shopping-cart"></i>
+                <i class="fa fa-heart"></i>
+                <button>عرض</button>
+            </div>
+
+                </a>
+
+            </div>
+
+            {% empty %}
+
+            <p>لا يوجد منتجات</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+<section class="section">
+    <h2 class="section-title">المنتجات المميزة</h2>
+    <div class="carousel featured-carousel">
+        {% for product in featured_products %}
+        <div class="carousel-cell card">
+            <img src="{{ product.image.url }}">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description|truncatechars:60 }}</p>
+            <p class="price">{{ product.price }} جنيه</p>
+            <div class="card-actions">
+                <i class="fa fa-shopping-cart"></i>
+                <i class="fa fa-heart"></i>
+                <button>عرض</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<script src="{% static 'js/product_list.js' %}"></script>
+{% endblock content %}

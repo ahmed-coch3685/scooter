@@ -1,0 +1,49 @@
+.my-orders-page {
+
+    padding: 50px;
+}
+
+.container {
+
+    max-width: 1000px;
+    margin: auto;
+}
+
+.orders-table {
+
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-table th,
+.orders-table td {
+
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+/* status colors */
+
+.status {
+
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.status.pending {
+    background: orange;
+}
+
+.status.processing {
+    background: blue;
+}
+
+.status.shipped {
+    background: purple;
+}
+
+.status.delivered {
+    background: green;
+}

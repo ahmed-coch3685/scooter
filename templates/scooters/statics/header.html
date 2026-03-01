@@ -1,0 +1,160 @@
+{% load static %}
+
+<header class="header">
+
+<div class="topbar">
+    <div class="container">
+        <span>✔ شحن مجاني</span>
+        <span>✔ ضمان سنة</span>
+        <span>✔ دفع عند الاستلام</span>
+        <span>✔ اسعار تنافسية</span>
+    </div>
+</div>
+  
+    <div class="container header-row">
+
+        <div class="controls">
+      {% comment %} {% if user.is_authenticated %}
+      <div class="user-box">
+            <a href="{% url 'acc:profile' %}" title="profile">
+            {% if request.user.avatar %}<img src="{{ request.user.avatar.url }}" alt="profile">
+            {% else %}<img src="/static/av.jpg" >
+            {% endif %}</a> 
+            <span>Hello {{ user.username }}</span>
+        </div> 
+        {% else %} {% endcomment %}
+        <a href="{% url 'acc:login'%}" class="register btn">تسجيل</a>
+        {% comment %} {% endif %}  {% endcomment %}
+
+
+
+<button id="darkToggle" class="theme-toggle" aria-label="Toggle theme">
+  <div class="moon">
+    <span class="sta"></span>
+    <span class="sta"></span>
+    <span class="sta"></span>
+  </div>
+  <div class="sun"></div>
+</button>
+
+ {% comment %} <form action="{% url 'set_language' %}" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ request.path }}">
+    <select name="language" id="language" onchange="this.form.submit()">
+        <option value="ar" {% if LANGUAGE_CODE == 'ar' %}selected{% endif %}>العربية</option>
+        <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+    </select>
+</form> 
+ {% endcomment %}
+
+        </div>
+        <div class="left-section">
+
+            <div class="icons">
+                <div class="icon">
+                        <a href="{% url 'order:my_orders' %}"><i class="fa-solid fa-cart-shopping icon"></i>
+                        <span class="badge"></span></a>
+                </div>
+
+                <div class="icon">
+                        <a href="{% url 'cart:cart' %}"><i class="fa-solid fa-cart-shopping icon"></i>
+                        <span class="badge">{{ cart_items_count }}</span></a>
+                </div>                
+                <div class="icon">
+                    <a href="{% url 'wl:wishlist' %}"><i class="fa-regular fa-bell icon"></i>
+                    <span class="badge">{{ unread_count }}</span></a>
+                </div>
+            </div>
+            <div class="logo"><a href="">scooter<img src="" alt=""></a></div>
+
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-row">
+
+            <!-- Right menu -->
+            <ul class="nav-menu" id="nav-menu">
+
+                <li class="dropdown">
+                    السكوترات
+                    <ul class="dropdown-menu">
+                        <li>كهربائية</li>
+                        <li>اطفالى</li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    قطع غيار
+                    <ul class="dropdown-menu">
+                        <li>بطاريات</li>
+                        <li>اطارات</li>
+                        <li>فرامل</li>
+                    </ul>
+                </li>
+
+                <li>اكسسوارات</li>
+                <li>تواصل معنا</li>
+
+            </ul>
+
+    <div class="burger" id="burger" >
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+        <div class="search-icon"onclick="openSearch()"><i class="fa-solid fa-magnifying-glass icon" id="searchIcon"></i></div>
+
+  </div>
+        </div>
+    </nav>
+
+</header>
+{% comment %} <nav class="menu" id="menu">
+           <a href="{% url 'pro:home' %}">"home"</a>
+</nav> {% endcomment %}
+<div class="overlay" id="overlay"></div>
+<!-- Search Overlay --> 
+ <div class="search-overlay" id="searchOverlay"> 
+    <div class="search-box"> <button onclick="closeSearch()"> <i class="fa fa-xmark"></i> </button> 
+        <div class="search-input-container"> <button> <i class="fa fa-search"></i> </button> 
+            <input type="text"id="searchFeild" placeholder="ابحث عن سكوتر..."> 
+            <button onclick="resetSearch()"> <i class="fa fa-xmark"></i> </button> </div> 
+            <div class="search-results"> <div class="result-item">سكوتر كهربائي X1</div> 
+            <div class="result-item">سكوتر اطفال</div> <div class="result-item">سكوتر طرق وعرة</div> 
+        </div> 
+    </div>
+</div>
+
+
+<!-- ===== Up To Top ===== -->
+<button id="toTop"><i class="fa-solid fa-chevron-up"></i>
+</button>
+<!-- ===== Accessibility Button ===== -->
+<div class="accessibility">
+    <button class="access-btn">♿</button>
+
+
+    <div class="access-menu">
+        <button onclick="changeFont(1)"><b>A</b>+</button>
+        <button onclick="changeFont(-1)"><small>A</small>-</button>
+        <button onclick="toggleContrast()">"color blind" </button>
+        <button onclick="resetAccess()">🔄"reset"  </button>
+    </div>
+</div>
+<script>
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('header');
+    const menu = document.querySelector('.nav-menu');
+
+    if (window.scrollY > 40) {  // بعد ما تسكرول 50px
+        header.style.background = 'var(--bg)'; 
+        menu.style.background = 'none'; 
+    } else {
+        header.style.background = 'rgba(255, 255, 255, 0)'; 
+        menu.style.background = 'var(--bg)'; 
+    }
+});
+</script><script src="{% static 'js/header.js' %}"></script>
+

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>الفئات</h1>
+
+<div class="categories-grid">
+    {% for category in categories %}
+    <div class="category-card">
+        <a href="{% url 'pro:category_products' category.slug %}">
+            <h3>{{ category.name }}</h3>
+            <p>{{ category.description|truncatewords:10 }}</p>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

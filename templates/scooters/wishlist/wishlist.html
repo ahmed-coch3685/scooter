@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="wishlist-page">
+
+    <div class="container">
+
+        <h1>المفضلة ❤️</h1>
+
+        {% if items %}
+
+        <div class="wishlist-grid">
+
+            {% for item in items %}
+
+            <div class="wishlist-card">
+
+                <a href="{% url 'pro:product_detail' item.product.slug %}">
+
+                    {% if item.product.images.first %}
+                        <img src="{{ item.product.images.first.image.url }}">
+                    {% endif %}
+
+                    <h3>{{ item.product.name }}</h3>
+
+                    <p>{{ item.product.price }} ج</p>
+
+                </a>
+
+                <div class="wishlist-actions">
+
+                    <a href="{% url 'cart:add_to_cart' item.product.id %}">
+                        إضافة للسلة
+                    </a>
+
+                    <a href="{% url 'wl:remove_from_wishlist' item.id %}">
+                        حذف
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <p>لا يوجد منتجات فى المفضلة</p>
+
+        {% endif %}
+
+    </div>
+
+</section>
+{% endblock content %}

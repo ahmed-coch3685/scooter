@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="order-detail-page" style="padding:40px;">
+
+    <div class="container">
+
+        <h1>تفاصيل الطلب #{{ order.id }}</h1>
+
+        <p>الاسم: {{ order.full_name }}</p>
+
+        <p>الهاتف: {{ order.phone }}</p>
+
+        <p>العنوان: {{ order.address }}</p>
+
+        <p>الحالة: {{ order.get_status_display }}</p>
+
+        <hr>
+
+        <h3>المنتجات:</h3>
+
+        <table>
+
+            <tr>
+                <th>المنتج</th>
+                <th>السعر</th>
+                <th>الكمية</th>
+                <th>الإجمالي</th>
+            </tr>
+
+            {% for item in order.items.all %}
+
+            <tr>
+
+                <td>{{ item.product.name }}</td>
+
+                <td>{{ item.price }} ج</td>
+
+                <td>{{ item.quantity }}</td>
+
+                <td>{{ item.total_price }} ج</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        <h2>
+            الإجمالي: {{ order.total_price }} ج
+        </h2>
+
+    </div>
+
+</section>
+{% endblock content %}

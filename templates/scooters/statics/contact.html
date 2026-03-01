@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>تواصل معنا</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="الاسم" required>
+    <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+    <textarea name="message" placeholder="رسالتك" required></textarea>
+    <button type="submit">إرسال</button>
+</form>
+{% endblock content %}

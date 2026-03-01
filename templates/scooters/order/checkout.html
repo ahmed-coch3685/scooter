@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="checkout-page">
+
+    <div class="checkout-container">
+
+        <h1>إتمام الطلب</h1>
+
+        <div class="checkout-grid">
+
+            <!-- form -->
+
+            <div class="checkout-form">
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <label>الاسم الكامل</label>
+                    <input type="text" name="full_name" required>
+
+                    <label>رقم الهاتف</label>
+                    <input type="text" name="phone" required>
+
+                    <label>العنوان</label>
+                    <textarea name="address" required></textarea>
+
+                    <button type="submit">
+                        تأكيد الطلب
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- summary -->
+
+            <div class="order-summary">
+
+                <h3>ملخص الطلب</h3>
+
+                {% for item in items %}
+
+                <div class="summary-item">
+
+                    <span>
+                        {{ item.product.name }}
+                    </span>
+
+                    <span>
+                        {{ item.quantity }} × {{ item.product.price }} ج
+                    </span>
+
+                </div>
+
+                {% endfor %}
+
+                <hr>
+
+                <h2>
+                    الإجمالي: {{ total }} ج
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+{% endblock content %}

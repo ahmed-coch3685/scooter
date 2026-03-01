@@ -1,0 +1,23 @@
+
+
+{% extends "base.html" %}
+
+{% block content %}
+<h2 style="color:red;">⚠️ حذف الحساب</h2>
+
+<p>
+هل أنت متأكد إنك عايز تحذف حسابك نهائيًا؟  
+العملية دي لا يمكن التراجع عنها.
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="checkbox" required> أنا فاهم إن الحساب هيتحذف نهائيًا
+    <button type="submit" style="background:red;color:white;">
+        نعم، احذف حسابي
+    </button>
+</form>
+
+<a href="{% url 'acc:profile' %}">إلغاء</a>
+
+{% endblock content %}

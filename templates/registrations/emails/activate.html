@@ -1,0 +1,5 @@
+مرحبًا {{ user.username }}
+
+اضغط على الرابط لتفعيل حسابك:
+
+http://{{ domain }}{% url 'acc:activate' uidb64=uid token=token %}
